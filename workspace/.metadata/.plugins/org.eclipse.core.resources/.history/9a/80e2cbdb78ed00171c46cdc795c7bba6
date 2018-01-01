@@ -1,0 +1,72 @@
+import java.util.*;
+
+public class ModernArt {
+
+	public static void main(String[] args) {
+		Scanner scanner = new Scanner(System.in);
+		int n = scanner.nextInt();
+		int[][] canvas = new int[n][n], pfxsum = new int[n + 1][n + 1];
+		TreeMap<Integer, int[]> corners = new TreeMap<Integer, int[]>(); // for each number, min & max x, then m&m y
+		
+		for (int i = 0; i < canvas.length; i++) {
+			for (int j = 0; j < canvas[0].length; j++) {
+				canvas[i][j] = scanner.nextInt();
+				if (canvas[i][j] != 0) {
+					if (!corners.containsKey(canvas[i][j])) corners.put(canvas[i][j], new int[] {n, 0, n, 0});
+					int[] arr = corners.get(canvas[i][j]);
+					arr[0] = Math.min(arr[0], j);
+					arr[1] = Math.max(arr[1], j + 1); // should be to immediate right of square
+					arr[2] = Math.min(arr[2], i);
+					arr[3] = Math.max(arr[3], i + 1);
+				}
+			}
+		} scanner.close();
+		
+		// for (Map.Entry<Integer, int[]> entry : corners.entrySet()) System.out.println(entry.getKey() + " " + Arrays.toString(entry.getValue()));
+		
+		for (int[] arr : corners.values()) {
+			pfxsum[arr[2]][arr[0]]++; // min x min y
+			pfxsum[arr[3]][arr[1]]++; // max x max y
+			pfxsum[arr[3]][arr[0]]--; // min x max y 
+			pfxsum[arr[2]][arr[1]]--; // max x min y
+		}
+		
+		// vertical column-by-column conversion
+		for (int j = 0; j < pfxsum[0].length; j++) {
+			int sum = 0;
+			for (int i = 0; i < pfxsum.length; i++) {
+				sum += pfxsum[i][j];
+				pfxsum[i][j] = sum;
+			}
+		}
+		
+		// horizontal row-by-row conversion
+		for (int i = 0; i < pfxsum.length; i++) {
+			int sum = 0;
+			for (int j = 0; j < pfxsum.length; j++) {
+				sum += pfxsum[i][j];
+				pfxsum[i][j] = sum;
+				if (pfxsum[i][j] > 1 && corners.containsKey(canvas[i][j])) corners.remove(canvas[i][j]);
+			}
+		}
+		
+		System.out.println(corners.size());
+		
+	}
+	
+}
+
+/*
+4
+2 2 3 0
+2 7 3 7
+2 7 7 7
+0 0 0 0
+
+4
+1 2 3 4
+5 6 7 8
+9 10 11 13
+11 12 12 13
+
+*/

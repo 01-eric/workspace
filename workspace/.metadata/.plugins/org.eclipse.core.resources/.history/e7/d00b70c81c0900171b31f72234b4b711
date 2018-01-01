@@ -1,0 +1,20 @@
+/*
+ ID: eric.111
+ LANG: JAVA
+ TASK: namenum
+ */
+
+import java.io.*;
+import java.util.*;
+
+public class namenum {
+
+	public static void main(String[] args) throws IOException {
+		/* Scanner scanner = new Scanner(new File("namenum.in"));
+		PrintWriter out = new PrintWriter(new BufferedWriter(new FileWriter("namenum.out"))); */
+		Scanner scanner = new Scanner(System.in);
+		BufferedReader br = new BufferedReader(new FileReader("namenumdict.txt"));
+		
+	}
+
+}

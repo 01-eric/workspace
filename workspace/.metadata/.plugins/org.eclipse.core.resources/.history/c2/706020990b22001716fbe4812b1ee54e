@@ -1,0 +1,52 @@
+
+import java.util.*;
+
+public class FirstClass {
+	
+	public static void main(String[] args) {
+		/* List<Integer> list = new ArrayList<Integer>(40);
+		for (int i = 0; i < 40; i++) list.add((int)(Math.random() * 100));
+		for (int element: list) System.out.print(element + " ");
+		int indexFirstSquare = -1;
+		for (int i = 0; i < list.size(); i++) if (Math.sqrt(list.get(i)) == (int)(Math.sqrt(list.get(i)))) indexFirstSquare = i;
+		System.out.println("\n" + indexFirstSquare);
+		if (indexFirstSquare >= 0) {
+			List<Integer> sublist = list.subList(0, indexFirstSquare);
+			list.add(list.get(indexFirstSquare));
+			list.subList(0, indexFirstSquare + 1).clear();
+			list.addAll(sublist);
+			for (int element: list) System.out.print(element + " ");
+		} */
+		ArrayList<Integer> test = new ArrayList<Integer>();
+		for (int i = 0; i < 10; i++) test.add(i);
+		int pointer = 0;
+		scan: while (test.size() > 1) {
+			if (test.get(pointer) != 6) {
+				System.out.println("removed" + test.get(pointer));
+				test.remove(pointer);
+			}
+			else {
+				pointer = 1;
+				System.out.println(test.get(0) + " " + test.get(pointer));
+			}
+		} System.out.println(test.get(0));
+		
+		
+	}
+
+}
+
+// 1. generate an array of 1000 random numbers between 1 and 1000000 and print out the lowest number in the array
+
+/*
+ * 2. (use ArrayList) create a list of 40 numbers between 1 and 100, find the first square number if it exists. reflect the array around this number.
+ */
+
+/*
+ * Use a scanner to read in a line of integers separated by a comma and a space.
+ * Find the median of the data set. If there are an even amount of numbers, average
+ * the two medians of the data set.
+ * 
+ * Input: 10, 5, 6, 7, 3, 41, 56, 61, 69, 612, 420, 12
+ * Output: 26.5
+ */

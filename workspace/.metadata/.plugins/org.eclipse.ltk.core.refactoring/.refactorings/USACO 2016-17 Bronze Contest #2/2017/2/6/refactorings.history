@@ -1,0 +1,4 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<session version="1.0">
+<refactoring comment="Move element &apos;Ascending.java&apos; to &apos;ACSL 2016-17 Intermediate Division/src/(default package)&apos;&#x0D;&#x0A;- Original project: &apos;USACO 2016-17 Bronze Contest #2&apos;&#x0D;&#x0A;- Destination element: &apos;ACSL 2016-17 Intermediate Division/src/(default package)&apos;&#x0D;&#x0A;- Original element: &apos;Ascending.java&apos;&#x0D;&#x0A;- Update references to refactored element" description="Move compilation unit" destination="=ACSL 2016-17 Intermediate Division/src&lt;" element1="/src&lt;{Ascending.java" files="0" flags="589830" folders="0" id="org.eclipse.jdt.ui.move" policy="org.eclipse.jdt.ui.moveResources" qualified="false" references="true" stamp="1486316003423" units="1" version="1.0"/>
+</session>

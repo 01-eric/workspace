@@ -1,0 +1,110 @@
+import java.util.*;
+
+public class TriangleCenters {
+	
+	static Point[] vertices = new Point[3];
+	static double[] sideLen;
+	
+	public static void main(String[] args) {
+		System.out.println(intersection(new Line(1, 0), new Line(0.5, 2)));
+		Scanner scanner = new Scanner(System.in);
+		for (int running = 0; running < 2; running++) {
+			String[] input = scanner.nextLine().split(", ");
+			for (int i = 0; i < vertices.length; i++) vertices[i] = new Point(Double.parseDouble(input[i * 2]), Double.parseDouble(input[i * 2 + 1]));
+			sideLen = new double[]{distance(vertices[1], vertices[2]), distance(vertices[0], vertices[2]), distance(vertices[0], vertices[1])};
+		}
+	}
+	
+	public static double distance(Point p1, Point p2) {
+		return Math.sqrt(Math.pow(p1.getY() - p2.getY(), 2) + Math.pow(p1.getX() - p2.getX(), 2));
+	}
+	
+	public static Point midpoint(Point p1, Point p2) {
+		return new Point((p1.getX() + p2.getX()) / 2, (p1.getY() + p2.getY()) / 2);
+	}
+	
+	public static Point intersection(Line f1, Line f2) {
+		return new Point((f2.getYInt() - f1.getYInt()) / (f1.getSlope() - f2.getSlope()), f1.getSlope() * (f2.getYInt() - f1.getYInt()) / (f1.getSlope() - f2.getSlope()) + f1.getYInt());
+	}
+	
+	public static Point circumcenter() {
+		
+	}
+	
+	public static Point incenter() {
+		
+	}
+	
+	public static Point orthocenter() {
+		
+	}
+	
+	public static Point centroid() {
+		
+	}
+
+}
+
+
+
+class Point {
+	
+	private double x;
+	private double y;
+	
+	Point(double x, double y) {
+		this.x = x;
+		this.y = y;
+	}
+	
+	Point() {
+		this(0, 0);
+	}
+	
+	public double getX() {
+		return x;
+	}
+	
+	public double getY() {
+		return y;
+	}
+	
+	public void move(double x, double y) {
+		this.x = x;
+		this.y = y;
+	}
+	
+	public String toString() {
+		return x + ", " + y;
+	}
+	
+}
+
+class Line {
+	
+	private double slope;
+	private double yIntercept;
+	
+	Line(double slope, double yIntercept) {
+		this.slope = slope;
+		this.yIntercept = yIntercept;
+	}
+	
+	Line(Point p1, Point p2) {
+		slope = (p1.getY() - p2.getY()) / (p1.getX() - p2.getX());
+		yIntercept = p1.getY() - slope * p1.getX();
+	}
+	
+	Line(double slope, Point p) {
+		this(slope, p.getY() - slope * p.getX());
+	}
+	
+	public double getSlope() {
+		return slope;
+	}
+	
+	public double getYInt() {
+		return yIntercept;
+	}
+	
+}

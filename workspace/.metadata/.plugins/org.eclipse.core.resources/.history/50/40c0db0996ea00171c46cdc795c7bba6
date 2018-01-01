@@ -1,0 +1,55 @@
+import java.util.*;
+
+public class activityselection {
+	
+	public static void main(String[] args) {
+		// initialization code
+		Scanner scanner = new Scanner(System.in);
+		int N = Integer.parseInt(scanner.nextLine());
+		int[] startTimes = new int[N], endTimes = new int[N];
+		for (int i = 0; i < N; i++) {
+			String[] temp = scanner.nextLine().split(", ");
+			startTimes[i] = Integer.parseInt(temp[0]);
+			endTimes[i] = Integer.parseInt(temp[1]);
+		} dualInsertionSort(endTimes, startTimes); // sort both arrays based on endTimes
+		int prev = 0, count = 1; // iterate through all activities keeping track of the previous activity's end time
+		// first event always counted; start at event 2 (index 1) initialize count = 1 and current = 1
+		for (int current = 1; current < N; current++) {
+			if (startTimes[current] >= endTimes[prev]) {
+				count++;
+				prev = current;
+			}
+		} System.out.println(count);
+		
+	}
+	
+	/*
+	 * Sorts according to array1, so array2 may not be sorted but will 
+	 * be in same order as array1. assume array1.length = array2.length
+	 */
+	static void dualInsertionSort(int[] array1, int[] array2) {
+		for (int i = 1; i < array1.length; i++) {
+			for (int j = i; j > 0 && array1[j] < array1[j - 1]; j--) {
+				swapElements(array1, j, j - 1);
+				swapElements(array2, j, j - 1);
+			}
+		}
+	}
+	
+	private static void swapElements(int[] array, int index1, int index2) {
+		int temp = array[index1];
+		array[index1] = array[index2];
+		array[index2] = temp;
+	}
+
+}
+
+/*
+5
+2 4
+1 12
+4 5
+7 10
+7 8
+
+*/

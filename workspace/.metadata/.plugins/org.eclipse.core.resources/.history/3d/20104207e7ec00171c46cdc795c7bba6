@@ -1,0 +1,45 @@
+import java.util.*;
+
+public class Skicourse {
+	
+	public static void main(String[] args) {
+		Scanner scanner = new Scanner(System.in);
+		int[][] skicourse = new int[scanner.nextInt()][scanner.nextInt()];
+		scanner.nextLine();
+		for (int i = 0; i < skicourse.length; i++) {
+			char[] input = scanner.nextLine().toCharArray();
+			for (int j = 0; j < skicourse[0].length; j++) skicourse[i][j] = input[j] == 'R' ? 1 : 0;
+		} scanner.close();
+		
+		largestStamp(skicourse);
+	}
+	
+	static int largestStamp(int[][] skicourse) {
+		int[][] dp_0 = new int[skicourse.length][skicourse[0].length], dp_1 = new int[skicourse.length][skicourse[0].length];
+		for (int i = skicourse.length - 1; i >= 0; i--) {
+			for (int j = skicourse[0].length - 1; j >= 0; j--) {
+				int dp_e = j + 1 >= dp_0[0].length ? 0 : dp_0[i][j + 1];
+				int dp_se = j + 1 >= dp_0[0].length || i + 1 >= dp_0.length ? 0 : dp_0[i + 1][j + 1];
+				int dp_s = i + 1 >= dp_0.length ? 0 : dp_0[i + 1][j];
+				if (skicourse[i][j] == 0) dp_0[i][j] = 1 + Math.min(Math.min(dp_e, dp_se), dp_s);
+				dp_e = j + 1 >= dp_1[0].length ? 0 : dp_1[i][j + 1];
+				dp_se = j + 1 >= dp_1[0].length || i + 1 >= dp_1.length ? 0 : dp_1[i + 1][j + 1];
+				dp_s = i + 1 >= dp_1.length ? 0 : dp_1[i + 1][j];
+				if (skicourse[i][j] == 1) dp_1[i][j] = 1 + Math.min(Math.min(dp_e, dp_se), dp_s);
+			}
+		}
+		
+		for (int[] a : dp_1) System.out.println(Arrays.toString(a));
+		
+		return 1;
+	}
+
+}
+
+/*
+3 6
+RSRSSS
+RSRSSS
+RSRSSS
+
+*/

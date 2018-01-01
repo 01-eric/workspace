@@ -1,0 +1,11 @@
+import java.util.*;
+
+public class PartitionSum {
+	
+	public static void main(String[] args) {
+		Scanner scanner = new Scanner(System.in);
+		double n = scanner.nextInt();
+		System.out.println((n/2)*(1+n));
+	}
+
+}

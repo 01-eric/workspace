@@ -1,0 +1,48 @@
+/*
+ ID: eric.111
+ LANG: JAVA
+ TASK: wormhole
+ */
+
+import java.awt.Point;
+import java.io.*;
+import java.util.*;
+
+/*
+ * Since N <= 12 O(N) insertion
+ * sort is completely fine, sort by
+ * x coordinate to determine all
+ * linear configurations of wormholes,
+ * then get factorial sum of n-1 within
+ * a line to find amount of pairs to form
+ * (e.g. horiz. line with 4 holes forms
+ * 3+2+1=6 different pairs)
+ */
+
+public class wormhole {
+	
+	public static void main(String[] args) throws IOException {
+		Scanner scanner = new Scanner(new File("wormhole.in"));
+		PrintWriter out = new PrintWriter(new BufferedWriter(new FileWriter("wormhole.out")));
+		// Scanner scanner = new Scanner(System.in);
+		Point[] wormholes = new Point[scanner.nextInt()];
+		for (int i = 0; i < wormholes.length; i++) wormholes[i] = new Point(scanner.nextInt(), scanner.nextInt());
+		insertionSort(wormholes);
+		
+		
+		System.out.println();
+		out.close();
+	}
+	
+	static void insertionSort(Point[] array) {
+		for (int i = 1; i < array.length; i++) {
+			for (int j = i - 1; j >= 0 && array[j].getX() > array[j + 1].getX(); j--) {
+				Point temp = array[j]; // pointer swap
+				array[j] = array[j + 1];
+				array[j + 1] = temp;
+			}
+		}
+	}
+	
+	
+}

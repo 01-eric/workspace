@@ -1,0 +1,75 @@
+import java.util.*;
+
+public class NinetyNine {
+	
+	public static void main(String[] args) {
+		Scanner scanner = new Scanner(System.in);
+		ArrayList<String> p1hand = new ArrayList<String>(5), p2hand = new ArrayList<String>(5);
+		int p1score, p2score;
+		String[] init = scanner.nextLine().split(", "); // initialize hand
+		for (int i = 0; i < init.length / 2; i++) p1hand.add(init[i]);
+		for (int i = init.length / 2; i < init.length; i++) p2hand.add(init[i]);
+		
+		// 5 loops
+		for (int runs = 0; runs < 5; runs++) {
+			String[] input = scanner.nextLine().split(", ");
+			p1score = p2score = Integer.parseInt(input[0]); // initial score
+			for (int i = 1; i < input.length; i++) { // go through cards to play
+				sortByValue(p1hand); // efficiency doesn't really matter
+				System.out.printf("%s Player 1 plays %s and draws %s. Score goes from %d ", Arrays.toString(p1hand.toArray()), p1hand.get(p1hand.size() / 2), input[i], p1score);
+				p1score += getPoints(p1hand.remove(p1hand.size() / 2), p1score); // play median card
+				System.out.printf("to %d\n", p1score);
+				p1hand.add(input[i++]); // draw
+				sortByValue(p2hand);
+				System.out.printf("%s Player 2 plays %s and draws %s. Score goes from %d ", Arrays.toString(p1hand.toArray()), p2hand.get(p2hand.size() / 2), input[i], p2score);
+				p2score += getPoints(p2hand.remove(p2hand.size() / 2), p2score); // play median card
+				System.out.printf("to %d\n", p2score);
+				p2hand.add(input[i]);
+			}
+		}
+	}
+	
+	static int getValue(String card) {
+		switch (card) {
+			case "T": return 10;
+			case "J": return 11;
+			case "Q": return 12;
+			case "K": return 13;
+			case "A": return 14;
+			default: return card.charAt(0) - 48;
+		}
+	}
+	
+	static int getPoints(String card, int score) {
+		switch (card) { // no break needed because return breaks
+			case "7": return score > 92 ? 1 : getValue(card);
+			case "9": return 0;
+			case "T": return -getValue(card);
+			default: return getValue(card);
+		}
+	}
+	
+	static void sortByValue(ArrayList<String> hand) {
+		for (int i = 1; i < hand.size(); i++) {
+			for (int j = i; j > 0 && getValue(hand.get(j - 1)) > getValue(hand.get(j)); j--) {
+				String temp = new String(hand.get(j - 1)); // idk if strings set by reference so just in case
+				hand.set(j - 1, hand.get(j));
+				hand.set(j, temp);
+			}
+		}
+	}
+	
+}
+
+/*
+8, 9, Q, 6, 7, K, A, 5, 9, 8
+75, J, 7, Q, T, A, 6, 2, 3, 4, 5
+50, 7, K, T, 8, 3, Q, 9, 7, 2, 3
+63, 3, 6, 8, T, 7, 7, T, 3, 5, 8
+79, A, 9, 7, T, A, 9, T, A, 6, 4
+50, A, T, Q, A, T, K, J, T, A, 7
+
+99, 7, 7, 7, 7, 7, 7, 7, 7, 7, 7
+92, 7, 7, 7, 7, 7, 7, 7, 7, 7, 7
+100, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2
+ */

@@ -1,0 +1,13 @@
+import java.util.*;
+
+public class PartitionSum {
+	
+	public static void main(String[] args) {
+		Scanner scanner = new Scanner(System.in);
+		double n = scanner.nextInt();
+		if ((n / 2) * (1 + n) % 2 != 1) {
+			
+		} else System.out.println(0);
+	}
+
+}

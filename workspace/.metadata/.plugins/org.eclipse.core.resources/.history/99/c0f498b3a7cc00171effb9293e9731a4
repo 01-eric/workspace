@@ -1,0 +1,13 @@
+
+public class Test {
+	
+	public static void main(String[] args) {
+		int t = 0, f = 0;
+		for (int i = 0; i < 1000; i++) { // 1000 repetitions
+			if (Math.max(Math.max(Math.random(), Math.random()), Math.max(Math.random(), Math.random())) > 0.07) t++;
+			else f++;
+		} System.out.println((double)t / (t + f));
+	}
+	
+}
+

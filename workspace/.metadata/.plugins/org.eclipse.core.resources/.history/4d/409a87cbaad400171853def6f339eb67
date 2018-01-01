@@ -1,0 +1,18 @@
+import java.util.*;
+
+public class Test {
+	
+	public static void main(String[] args) {
+		double t = 0, f = 0;
+		int[] subjects = {0, 0, 0, 0, 0, 0, 0, 0, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1};
+		for (int i = 0; i < 1000000; i++) { // 1 million repetitions
+			ArrayList<Boolean> slips = new ArrayList<Boolean>(20);
+			for (int gender: subjects) slips.add(gender == 0); // true for man, false for woman
+			int men = 0;
+			while (slips.size() > 10) if (slips.remove((int)(Math.random() * slips.size()))) men++;
+			t += (men >= 6 ? 1 : 0);
+		} System.out.println(t / (t + f));
+	}
+	
+}
+

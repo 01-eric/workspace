@@ -1,0 +1,21 @@
+import java.util.*;
+
+public class EatingTogether {
+	
+	public static void main(String[] args) {
+		Scanner scanner = new Scanner(System.in);
+		int[] cowNumbers = new int[scanner.nextInt()], ascending = new int[cowNumbers.length], descending = new int[cowNumbers.length];
+		ascending[0] = descending[0] = 1;
+		int goingup = 0, goingdown = 0;
+		for (int i = 0; i < cowNumbers.length; i++) cowNumbers[i] = scanner.nextInt();
+		for (int i = 0; i < cowNumbers.length; i++) {
+			for (int j = 0; j < i; j++) {
+				if (cowNumbers[i] >= cowNumbers[j] && ascending[j] > goingup) goingup = ascending[j];
+				if (cowNumbers[j] >= cowNumbers[i] && descending[j] > goingdown) goingdown = descending[j];
+				ascending[i] = goingup + 1;
+				descending[i] = goingdown + 1;
+			}
+		} System.out.println(cowNumbers.length - Math.max(ascending[ascending.length - 1], descending[descending.length - 1]));
+	}
+
+}

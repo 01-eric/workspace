@@ -1,0 +1,40 @@
+import java.awt.*;
+import javax.swing.*;
+import java.util.*;
+
+public class Road extends JPanel {
+	
+	final static int LANE_HEIGHT = 120;
+	final static int LENGTH = Toolkit.getDefaultToolkit().getScreenSize().width;
+	private ArrayList<Vehicle> cars = new ArrayList<Vehicle>();
+	
+	public Road() {
+		super(); // why do we need this
+	}
+	
+	public void paintComponent(Graphics g) {
+		super.paintComponent(g); // ?
+		g.setColor(new Color(0x000000));
+		g.fillRect(0, 0, this.getWidth(), this.getHeight());
+		g.setColor(new Color(0xFFFFFF));
+		for (int a = 0; a < 3; a++) for (int b = 0; b < getWidth(); b += 50) g.fillRect(b, LANE_HEIGHT * (1 + a) - 2, 30, 5);
+		for (Vehicle vehicle: cars) vehicle.paintMe(g);
+	}
+	
+	public void addCar(Vehicle... v) {
+		for (Vehicle vehicle: v) cars.add(vehicle);
+	}
+
+	public void step() {
+		for (Vehicle vehicle: cars) {
+			if (vehicle.getX() > LENGTH) vehicle.setX(0);
+			else vehicle.setX(vehicle.getX() + vehicle.getSpeed());
+		}
+	}
+
+	public boolean collision(int x, int y, int width, Vehicle v) {
+		for (Vehicle vc: cars) if (y == vc.getY() && !vc.equals(v) && v.getX() < vc.getX() + vc.getWidth() && v.getX() + v.getWidth() > vc.getX()) return true;
+		return false;
+	}
+	
+}

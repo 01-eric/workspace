@@ -1,0 +1,4 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<session version="1.0">
+<refactoring comment="Rename local variable &apos;i1&apos; in &apos;Skyscraper.onepos(...)&apos; to &apos;rows&apos;&#x0D;&#x0A;- Original project: &apos;ACSL 2016-17 Intermediate Division&apos;&#x0D;&#x0A;- Original element: &apos;Skyscraper.onepos(int, int, int, int, String[][]).i1&apos;&#x0D;&#x0A;- Renamed element: &apos;i1&apos;&#x0D;&#x0A;- Update references to refactored element" description="Rename local variable &apos;i1&apos;" id="org.eclipse.jdt.ui.rename.local.variable" input="/src&lt;{Skyscraper.java[Skyscraper~onepos~I~I~I~I~\[\[QString;@i1!2384!2393!2388!2389!I!0!false" name="rows" references="true" stamp="1492228358619" version="1.0"/>
+</session>

@@ -1,0 +1,4 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<session version="1.0">
+<refactoring comment="Rename type &apos;simpleGreedy&apos; to &apos;activityselection&apos;&#x0D;&#x0A;- Original project: &apos;USACO Training&apos;&#x0D;&#x0A;- Original element: &apos;simpleGreedy&apos;&#x0D;&#x0A;- Renamed element: &apos;activityselection&apos;&#x0D;&#x0A;- Update references to refactored element&#x0D;&#x0A;- Update textual occurrences in comments and strings" description="Rename type &apos;simpleGreedy&apos;" flags="589830" id="org.eclipse.jdt.ui.rename.type" input="/src&lt;{simpleGreedy.java[simpleGreedy" matchStrategy="1" name="activityselection" qualified="false" references="true" similarDeclarations="false" stamp="1506869626065" textual="false" version="1.0"/>
+</session>

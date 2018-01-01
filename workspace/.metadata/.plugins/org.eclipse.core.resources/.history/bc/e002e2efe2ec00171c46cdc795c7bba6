@@ -1,0 +1,19 @@
+import java.util.*;
+
+public class Skicourse {
+	
+	public static void main(String[] args) {
+		Scanner scanner = new Scanner(System.in);
+		int[][] skicourse = new int[scanner.nextInt()][scanner.nextInt()];
+		for (int i = 0; i < skicourse.length; i++) {
+			char[] input = scanner.nextLine().toCharArray();
+			for (int j = 0; j < skicourse[0].length; j++) skicourse[i][j] = input[j] == 'R' ? 1 : 0;
+		} scanner.close();
+		
+		for (int i = 0; i < skicourse.length; i++) {
+			for (int j = 0; j < skicourse[0].length; j++) System.out.print(skicourse[i][j]);
+			System.out.println();
+		}
+	}
+
+}

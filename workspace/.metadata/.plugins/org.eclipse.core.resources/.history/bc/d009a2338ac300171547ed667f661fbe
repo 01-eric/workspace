@@ -1,0 +1,60 @@
+/*
+ ID: eric.111
+ LANG: JAVA
+ TASK: wormhole
+ */
+
+import java.awt.Point;
+import java.io.*;
+import java.util.*;
+
+/*
+ * Recursively generate all permutations of
+ * n <= 12 wormholes, treating adjacent wormholes
+ * as pairs. Find all working solutions. 12 levels,
+ * each with n-d function calls where d is the 
+ * recursion depth.
+ */
+
+public class wormhole {
+	
+	static LinkedList<Point[][]> pairings = new LinkedList<Point[][]>();
+	
+	public static void main(String[] args) throws IOException {
+		Scanner scanner = new Scanner(new File("wormhole.in"));
+		PrintWriter out = new PrintWriter(new BufferedWriter(new FileWriter("wormhole.out")));
+		// Scanner scanner = new Scanner(System.in);
+		int n = scanner.nextInt();
+		ArrayList<Point> wormholes = new ArrayList<Point>(n);
+		for (int i = 0; i < n; i++) wormholes.add(new Point(scanner.nextInt(), scanner.nextInt()));
+		
+		findPairs(new ArrayList<Point>(), wormholes);
+		for (int i = 0; i < pairings.size(); i++) { // walk through all pairings, remove ones that don't have cycles
+			boolean hasCycle = false;
+			for (Point[] pair: pairings.get(i)) {
+				System.out.println(Arrays.toString(pair));
+			}
+		}
+		
+		System.out.println();
+		out.close();
+	}
+	
+	// permutation method to find all distinct pairings. terminating at n-1 if odd is not needed
+	// because (n P n-1) is the same thing as (n P n)
+	static void findPairs(ArrayList<Point> prefix, ArrayList<Point> remainingPoints) {
+		if (remainingPoints.isEmpty()) { // permutation complete, add to pairings
+			Point[][] pairs = new Point[(int)(prefix.size() / 2)][2]; // if odd number just truncate (leave one unpaired)
+			for (int i = 0; i < pairs.length * pairs[0].length; i++) pairs[i / 2][i % 2] = prefix.remove(0);
+			pairings.add(pairs);
+		} else {
+			for (int i = 0; i < remainingPoints.size(); i++) { // iterate through remaining points, new function call with each remaining point added
+				ArrayList<Point> copyOfPrefix = new ArrayList<Point>(prefix), copyOfRemainingPoints = new ArrayList<Point>(remainingPoints);
+				copyOfPrefix.add(copyOfRemainingPoints.remove(i)); // new function call requires updated prefix and remaining points subtracted
+				findPairs(copyOfPrefix, copyOfRemainingPoints);
+			}
+		}
+	}
+	
+	
+}

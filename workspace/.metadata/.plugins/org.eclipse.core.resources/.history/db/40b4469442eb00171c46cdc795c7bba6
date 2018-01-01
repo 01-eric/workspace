@@ -1,0 +1,21 @@
+import java.util.*;
+
+public class PartitionSum {
+	
+	public static void main(String[] args) {
+		Scanner scanner = new Scanner(System.in);
+		double n = scanner.nextInt();
+		int sum = (int)((n / 2) * (1 + n));
+		if (sum % 2 == 0) { // sum is even
+			sum /= 2; // find number of ways to make sum/2
+			int[] dp = new int[sum];
+			dp[0] = 1;
+			for (int i = 1; i < n; i++) {
+				int[] copydp = new int[dp.length];
+				for (int j = 0; j < copydp.length; j++) copydp[j] = dp[j]; // make deep copy
+				for (int j = 0; j < dp.length; j++) dp[j] = copydp[j] + copydp[j - i];
+			} System.out.println(Arrays.toString(dp));
+		} else System.out.println(0);
+	}
+
+}

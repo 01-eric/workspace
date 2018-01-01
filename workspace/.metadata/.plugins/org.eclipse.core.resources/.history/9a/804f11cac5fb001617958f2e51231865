@@ -1,0 +1,14 @@
+
+public class FirstClass {
+
+	public static void main(String[] args) {
+		int y_intercept = 10;
+		if (y_intercept > 10) {
+			y_intercept = 10;
+		} else {
+			y_intercept = 0;
+		} System.out.println(y_intercept);
+		
+	}
+
+}

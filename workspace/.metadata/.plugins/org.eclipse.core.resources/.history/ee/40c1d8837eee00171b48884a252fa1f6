@@ -1,0 +1,11 @@
+import java.util.*;
+
+public class EatingTogether {
+	
+	public static void main(String[] args) {
+		Scanner scanner = new Scanner(System.in);
+		int[] cowNumbers = new int[scanner.nextInt()];
+		
+	}
+
+}

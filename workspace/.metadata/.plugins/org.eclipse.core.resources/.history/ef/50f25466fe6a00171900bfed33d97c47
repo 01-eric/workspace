@@ -1,0 +1,155 @@
+import java.io.*;
+import java.awt.*;
+import java.awt.event.*;
+import javax.swing.*;
+
+public class _2048 implements KeyListener {
+	
+	static JFrame frame = new JFrame("2048");
+	static int[][] powerVal = new int[4][4];
+	static GamePane pane = new GamePane();
+	static int score = 0;
+	
+	public static void main(String[] args) { 
+		new _2048();
+	}
+	
+	public _2048() {
+		frame.setVisible(true);
+		frame.setResizable(false);
+		frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+		frame.setSize(1000, 1020);
+		frame.setLayout(new BorderLayout());
+		frame.add(pane, BorderLayout.CENTER);
+		frame.addKeyListener(this); 
+		setEmptySpace(Math.random() < 0.5 ? 1 : 2);
+		setEmptySpace(Math.random() < 0.5 ? 1 : 2);
+	}
+	
+	public static void setEmptySpace(int exp) {
+		int count = 0;
+		for (int i = 0; i < powerVal.length; i++) for (int j = 0; j < powerVal[0].length; j++) if (powerVal[i][j] == 0) count++;
+		int rand = (int)(Math.random() * count);
+		count = 0;
+		for (int i = 0; i < powerVal.length; i++) {
+			for (int j = 0; j < powerVal[0].length; j++) {
+				if (powerVal[i][j] == 0) {
+					if (count++ == rand) {
+						powerVal[i][j] = exp;
+						return;
+					}
+				}
+			}
+		}
+	}
+	
+	@Override
+	public void keyTyped(KeyEvent e) {} 
+	public void keyPressed(KeyEvent e) {}
+	public void keyReleased(KeyEvent e) {
+		if (e.getKeyCode() == KeyEvent.VK_R) {
+			Object[] options = {"Yes", "No"};
+			if (JOptionPane.showOptionDialog(frame, "Are you sure you want to restart?", "Restart Game", JOptionPane.DEFAULT_OPTION, JOptionPane.WARNING_MESSAGE, null, options, options[0]) == 0) {
+				for (int i = 0; i < powerVal.length; i++) for (int j = 0; j < powerVal[0].length; j++) powerVal[i][j] = 0;
+				setEmptySpace(Math.random() < 0.5 ? 1 : 2);
+				setEmptySpace(Math.random() < 0.5 ? 1 : 2);
+				score = 0;
+			}
+		} else { 
+			if (has2048() || !isPlayable()) return; // don't allow any actions except restart
+			int iStart = 0, jStart = 0, iOffset = 0, jOffset = 0, iStep = 1, jStep = 1;
+			if (e.getKeyCode() == KeyEvent.VK_UP) {
+				iStart = 1;
+				iOffset = -1;
+			} else if (e.getKeyCode() == KeyEvent.VK_DOWN) {
+				iStart = powerVal.length - 2;
+				iOffset = 1;
+				iStep = -1;
+			} else if (e.getKeyCode() == KeyEvent.VK_LEFT) {
+				jStart = 1;
+				jOffset = -1;
+			} else if (e.getKeyCode() == KeyEvent.VK_RIGHT) {
+				jStart = powerVal[0].length - 2;
+				jOffset = 1;
+				jStep = -1;
+			} int count = 0;
+			boolean[][] combined = new boolean[powerVal.length][powerVal[0].length];
+			while (true) {
+				boolean madeChange = false;
+				for (int i = iStart; iStep == 1 ? i < powerVal.length : i >= 0; i += iStep) {
+					for (int j = jStart; jStep == 1 ? j < powerVal.length : j >= 0; j += jStep) {
+						if (powerVal[i][j] != 0 && powerVal[i + iOffset][j + jOffset] == 0) {
+							powerVal[i + iOffset][j + jOffset] = powerVal[i][j];
+							combined[i + iOffset][j + jOffset] = combined[i][j];
+							powerVal[i][j] = 0;
+							combined[i][j] = false;
+							madeChange = true;
+						} else if (powerVal[i][j] != 0 && powerVal[i][j] == powerVal[i + iOffset][j + jOffset] && !combined[i + iOffset][j + jOffset] && !combined[i][j]) {
+							powerVal[i + iOffset][j + jOffset]++;
+							combined[i + iOffset][j + jOffset] = true;
+							powerVal[i][j] = 0;
+							combined[i][j] = false;
+							madeChange = true;
+							score += Math.pow(2, powerVal[i + iOffset][j + jOffset]);
+						}
+					}
+				} if (!madeChange) break;
+				count++;
+			} if (count != 0) setEmptySpace(Math.random() < 0.5 ? 1 : 2);
+		} pane.repaint();
+		if (has2048()) JOptionPane.showMessageDialog(frame, "You win! Your score is " + score + ". Press R to restart.");
+		else if (!isPlayable()) JOptionPane.showMessageDialog(frame, "Game Over. Your score is " + score + ". Press R to restart.");
+	}
+	
+	public static boolean has2048() {
+		for (int i = 0; i < powerVal.length; i++) for (int j = 0; j < powerVal[0].length; j++) if (powerVal[i][j] == 11) return true;
+		return false;
+	}
+	
+	public static boolean isPlayable() {
+		for (int i = 1; i < powerVal.length; i++) for (int j = 0; j < powerVal[0].length; j++) if (powerVal[i][j] == powerVal[i - 1][j] || powerVal[i][j] == 0 || powerVal[i - 1][j] == 0) return true;
+		for (int j = 1; j < powerVal[0].length; j++) for (int i = 0; i < powerVal.length; i++) if (powerVal[i][j] == powerVal[i][j - 1] || powerVal[i][j] == 0 || powerVal[i][j - 1] == 0) return true;
+		return false;
+	}
+	
+}
+
+class GamePane extends JPanel {
+	
+	@Override
+	public void paintComponent(Graphics g) {
+		super.paintComponent(g);
+		g.setFont(new Font(Font.SANS_SERIF, Font.BOLD, 36));
+		g.setColor(Color.LIGHT_GRAY);
+		g.fillRect(20, 20, 950, 950);
+		for (int i = 0; i < 4; i++) {
+			for (int j = 0; j < 4; j++) {
+				g.setColor(getTileColor(_2048.powerVal[i][j]) == null ? new Color(0xD3D3D3) : getTileColor(_2048.powerVal[i][j]));
+				g.fillRect(50 + 230 * j, 50 + 230 * i, 200, 200);
+				if (!g.getColor().equals(new Color(0xD3D3D3))) {
+					g.setColor(_2048.powerVal[i][j] > 2 ? Color.WHITE : Color.DARK_GRAY);
+					String pow = Integer.toString((int)Math.pow(2, _2048.powerVal[i][j]));
+					g.drawString(pow, 150 - (pow.length() * 11) + 230 * j, 165 + 230 * i);
+				}
+			}
+		}
+	}
+	
+	private Color getTileColor(int exp) {
+		switch (exp) {
+			case 1: return Color.WHITE;
+			case 2: return new Color(0xFFF5CC);
+			case 3: return new Color(0xFFB366);
+			case 4: return new Color(0xFF9933);
+			case 5: return new Color(0xFF8566);
+			case 6: return new Color(0xFF5C33);
+			case 7: return new Color(0xFFDD99);
+			case 8: return new Color(0xFFD480);
+			case 9: return new Color(0xFFC34D);
+			case 10: return new Color(0xFFB31A);
+			case 11: return new Color(0xCC8800);
+			default: return null;
+		}
+	}
+	
+}

@@ -1,0 +1,24 @@
+import java.util.*;
+
+public class Mountain {
+	
+	public static void main(String[] args) {
+		Scanner scanner = new Scanner(System.in);
+		System.out.println("3211112333677777776543332111112344456765432111212111112343232111111211".length());
+		int[] measurements = new int[scanner.nextInt()];
+		for (int i = 0; i < measurements.length; i++) measurements[i] = scanner.nextInt();
+		scanner.close();
+		
+		int[] dp_fwd = new int[measurements.length], dp_rev = new int[measurements.length];
+		dp_fwd[0] = dp_rev[dp_rev.length - 1] = 1;
+		
+	}
+
+}
+
+/*
+7
+3 2 3 5 4 1 6
+
+*/
+

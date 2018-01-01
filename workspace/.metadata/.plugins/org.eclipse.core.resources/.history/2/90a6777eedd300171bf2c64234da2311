@@ -1,0 +1,23 @@
+import java.util.*;
+
+public class NinetyNine {
+	
+	public static void main(String[] args) {
+		Scanner scanner = new Scanner(System.in);
+		ArrayList<Integer> p1hand = new ArrayList<Integer>(5), p2hand = new ArrayList<Integer>(5);
+		int p1score, p2score;
+		p1score = p2score = 50;
+		System.out.println(p1score + p2score);
+		
+	}
+	
+	static int getValue(String card, int score) {
+		switch (card) { // no break needed because return breaks
+			case "7": return score > 92 ? 1 : 7;
+			case "9": return 0;
+			case "T": return -10;
+			default: return card.charAt(0) - 48;
+		}
+	}
+	
+}

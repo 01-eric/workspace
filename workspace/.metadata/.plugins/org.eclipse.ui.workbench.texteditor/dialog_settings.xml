@@ -1,0 +1,38 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<section name="Workbench">
+	<section name="org.eclipse.ui.texteditor.FindReplaceDialog">
+		<item value="false" key="isRegEx"/>
+		<item value="copyOfRemaining.get(i)" key="selection"/>
+		<item value="false" key="casesensitive"/>
+		<item value="false" key="incremental"/>
+		<item value="true" key="wrap"/>
+		<item value="false" key="wholeword"/>
+		<list key="findhistory">
+			<item value="teamToAdd"/>
+			<item value="PriorityQueue"/>
+			<item value="index of search: 290"/>
+			<item value="sort"/>
+			<item value="Integer.parseInt"/>
+			<item value=".setText"/>
+			<item value="board"/>
+			<item value="bottles"/>
+			<item value="x["/>
+		</list>
+		<list key="replacehistory">
+			<item value="copyOfRemaining.get(i)"/>
+			<item value="ArrayList"/>
+			<item value="Double.parseDouble"/>
+			<item value=" = new JButton"/>
+			<item value="grid"/>
+			<item value="i"/>
+			<item value="Integer.parseInt(first["/>
+		</list>
+	</section>
+	<section name="org.eclipse.ui.texteditor.FindReplaceDialog_dialogBounds">
+		<item value="298" key="DIALOG_WIDTH"/>
+		<item value="1|Segoe UI|9.0|0|WINDOWS|1|-27|0|0|0|400|0|0|0|1|0|0|0|0|Segoe UI" key="DIALOG_FONT_NAME"/>
+		<item value="407" key="DIALOG_HEIGHT"/>
+		<item value="630" key="DIALOG_X_ORIGIN"/>
+		<item value="268" key="DIALOG_Y_ORIGIN"/>
+	</section>
+</section>

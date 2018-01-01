@@ -1,0 +1,67 @@
+import java.util.*;
+import java.awt.*;
+
+public class TriangleCenters {
+	
+	public static void main(String[] args) {
+		Scanner scanner = new Scanner(System.in);
+		System.out.println(new Line(new PrecisionPoint(2, 0), new PrecisionPoint(4, 1)).toString());
+		for (int running = 0; running < 2; running++) {
+			String[] input = scanner.nextLine().split(", ");
+			
+		}
+	}
+
+}
+
+class PrecisionPoint {
+	
+	private double x;
+	private double y;
+	
+	PrecisionPoint(double x, double y) {
+		this.x = x;
+		this.y = y;
+	}
+	
+	PrecisionPoint() {
+		this(0, 0);
+	}
+	
+	public double getX() {
+		return x;
+	}
+	
+	public double getY() {
+		return y;
+	}
+	
+	public void move(double x, double y) {
+		this.x = x;
+		this.y = y;
+	}
+	
+}
+
+class Line {
+	
+	private double slope;
+	private double yIntercept;
+	
+	Line(PrecisionPoint p1, PrecisionPoint p2) {
+		slope = (p1.getY() - p2.getY()) / (p1.getX() - p2.getX());
+		yIntercept = p1.getY() - slope * p1.getX();
+	}
+	
+	public double getSlope() {
+		return slope;
+	}
+	
+	public double getYIntercept() {
+		return yIntercept;
+	}
+	
+	public String toString() {
+		return "y = " + slope + "x + " + yIntercept;
+	}
+}

@@ -1,0 +1,10 @@
+
+public class BitwiseOperators {
+
+	public static void main(String[] args) {
+		int bin = 0b01101001;
+		int boi = 0b01111011;
+		System.out.println(Integer.toString(bin, 2) + " & " + Integer.toString(boi, 2) + ": " + Integer.toString(bin & boi, 2));
+	}
+	
+}

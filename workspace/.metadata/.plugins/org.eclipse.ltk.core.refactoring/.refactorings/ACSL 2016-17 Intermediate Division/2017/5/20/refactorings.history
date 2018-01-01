@@ -1,0 +1,4 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<session version="1.0">
+<refactoring comment="Rename method &apos;Line.getYIntercept()&apos; to &apos;getYInt&apos;&#x0D;&#x0A;- Original project: &apos;ACSL 2016-17 Intermediate Division&apos;&#x0D;&#x0A;- Original element: &apos;Line.getYIntercept()&apos;&#x0D;&#x0A;- Renamed element: &apos;Line.getYInt()&apos;&#x0D;&#x0A;- Update references to refactored element" delegate="false" deprecate="false" description="Rename method &apos;getYIntercept&apos;" flags="589830" id="org.eclipse.jdt.ui.rename.method" input="/src&lt;{TriangleCenters.java[Line~getYIntercept" name="getYInt" references="true" stamp="1494806666416" version="1.0"/>
+</session>

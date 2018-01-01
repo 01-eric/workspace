@@ -1,0 +1,32 @@
+import java.io.*;
+import java.util.*;
+
+public class transform {
+	
+	public static void main(String[] args) throws IOException {
+		/* Scanner scanner = new Scanner(new File("milk2.in"));
+		PrintWriter out = new PrintWriter(new BufferedWriter(new FileWriter("milk2.out"))); */
+		Scanner scanner = new Scanner(System.in);
+		int dimensions = Integer.parseInt(scanner.nextLine());
+		char[][] preImage = new char[dimensions][dimensions];
+		char[][] postImage = new char[dimensions][dimensions];
+		for (int i = 0; i < preImage.length; i++) {
+			String line = scanner.nextLine();
+			for (int j = 0; j < preImage[0].length; j++) preImage[i][j] = line.charAt(j);
+		} for (int i = 0; i < postImage.length; i++) {
+			String line = scanner.nextLine();
+			for (int j = 0; j < postImage[0].length; j++) postImage[i][j] = line.charAt(j);
+		} if (Arrays.equals(preImage, postImage)) System.out.println(5);
+		for (int i = 1; i <= 3; i++) {
+			preImage = rotate90clockwise(preImage);
+			if (Arrays.equals(preImage, postImage)) System.out.println(i);
+		} // else reflect and check
+	}
+	
+	static char[][] rotate90clockwise(char[][] array) {
+		char[][] rotation = new char[array.length][array[0].length];
+		for (int i = 0; i < rotation.length; i++) for (int j = 0; j < rotation[0].length; j++) rotation[j][array.length - 1 - i] = array[i][j];
+		return rotation;
+	}
+
+}

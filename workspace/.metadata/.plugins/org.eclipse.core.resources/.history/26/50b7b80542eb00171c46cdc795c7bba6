@@ -1,0 +1,15 @@
+import java.util.*;
+
+public class PartitionSum {
+	
+	public static void main(String[] args) {
+		Scanner scanner = new Scanner(System.in);
+		double n = scanner.nextInt();
+		int sum = (int)((n / 2) * (1 + n));
+		System.out.println(sum);
+		if (sum % 2 == 0) { // sum is even
+			sum /= 2;
+		} else System.out.println(0);
+	}
+
+}

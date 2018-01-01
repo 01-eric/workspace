@@ -1,0 +1,78 @@
+public class CardTest {
+	
+	public static void main(String[] args) {
+		System.out.println(new Deck().toString());
+	}
+	
+}
+
+class Card {
+	
+	private String suit;
+	private int rank;
+	
+	Card(int rank, String suit) {
+		this.rank = rank;
+		this.suit = suit;
+	}
+	
+	Card(int rank, int suit) {
+		this(rank, toSuit(suit));
+	}
+	
+	private static String toSuit(int num) {
+		if (num == 1) return "Spade";
+		else if (num == 2) return "Heart";
+		else if (num == 3) return "Club";
+		else if (num == 4) return "Diamond";
+		return "";
+	}
+	
+	public int getRank() {
+		return rank;
+	}
+	
+	public String getSuit() {
+		return suit;
+	}
+	
+	public void setRank(int rank) {
+		if (rank >= 1 && rank <= 13) this.rank = rank;
+	}
+	
+	public void setSuit(String suit) {
+		if (suit.equals("Diamond") || suit.equals("Club") || suit.equals("Heart") || suit.equals("Spade")) this.suit = suit;
+	}
+	
+	public void setSuit(int suit) {
+		this.suit = toSuit(suit);
+	}
+	
+	public String toString() {
+		String rank;
+		if (this.rank == 1) rank = "Ace";
+		else if (this.rank == 11) rank = "Jack";
+		else if (this.rank == 12) rank = "Queen";
+		else if (this.rank == 13) rank = "King";
+		else rank = Integer.toString(this.rank);
+		return rank + " of " + suit;
+	}
+
+}
+
+class Deck {
+	
+	public static final int SIZE = 52;
+	private static Card[] deck = new Card[52];
+	
+	static void deckInit() {
+		for (int i = 1; i <= 4; i++) for (int j = 1; j <= 13; j++) deck[13 * (i - 1) + j - 1] = new Card(j, i);
+	}
+	
+	public String toString() {
+		StringBuilder toString = new StringBuilder();
+		for (Card c: deck) toString.append(c.toString()).append("\n");
+		return toString();
+	}
+	
+}

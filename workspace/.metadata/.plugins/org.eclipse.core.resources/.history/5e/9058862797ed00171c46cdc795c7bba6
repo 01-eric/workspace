@@ -1,0 +1,53 @@
+import java.util.*;
+import java.awt.*;
+
+public class CrazyFences {
+
+	public static void main(String[] args) {
+		ArrayList<ArrayList<Point>> shapes = new ArrayList<ArrayList<Point>>();
+		Scanner scanner = new Scanner(System.in);
+		Point[][] edges = new Point[scanner.nextInt()][2];
+		Point[] cows = new Point[scanner.nextInt()];
+		for (int i = 0; i < edges.length; i++) edges[i] = new Point[] {new Point(scanner.nextInt(), scanner.nextInt()), new Point(scanner.nextInt(), scanner.nextInt())};
+		for (int i = 0; i < cows.length; i++) cows[i] = new Point(scanner.nextInt(), scanner.nextInt());
+		scanner.close();
+		
+		boolean[] edgeIncluded = new boolean[edges.length];
+		for (int i = 0; i < edges.length; i++) {
+			if (!edgeIncluded[i]) {
+				int ptr = i; // new polygon starts with edge that is not yet added
+				shapes.add(new ArrayList<Point>()); // start new polygon
+				while (ptr != -1) {
+					shapes.get(shapes.size() - 1).add(edges[ptr][0]); // add starting point of edge given by ptr
+					edgeIncluded[ptr] = true;
+					double endpt_x = edges[ptr][1].getX(), endpt_y = edges[ptr][1].getY();
+					ptr = 0;
+					while (ptr < edges.length && (edges[ptr][0].getX() != endpt_x || edges[ptr][0].getY() != endpt_y)) ptr++;
+					if (ptr == edges.length) ptr = -1;
+				}
+			}
+		}
+		
+		for (ArrayList<Point> shape : shapes) System.out.println(Arrays.toString(shapes.toArray()));
+	}
+	
+}
+
+/*
+10 4
+0 0 10 0
+10 0 10 10
+0 0 0 10
+10 10 0 10
+8 8 9 8
+9 8 8 9
+8 9 8 8
+2 7 3 2
+3 2 7 5
+7 5 2 7
+15 3
+1 4
+4 5
+7 1
+
+*/

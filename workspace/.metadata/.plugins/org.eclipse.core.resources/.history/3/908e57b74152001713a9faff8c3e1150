@@ -1,0 +1,38 @@
+import java.util.*;
+
+public class MergeSort {
+	
+	public static void main(String[] args) {
+		int[] array = {1, 4, 5, 7, 15, 19, 21, 21, 21, 26, 56, 150, -5, -1, 16, 21, 25, 48, 48, 96, 350, 567, 598, 656, 980, Integer.MAX_VALUE};
+		merge(array, 0, 11, array.length - 1);
+		System.out.println(Arrays.toString(array));
+	}
+	
+	/*
+	 * procedure will merge sorted subarrays of array 
+	 * from indeces [p...q] and [q+1...r] into one sorted
+	 * subarray [p...r]
+	 */
+	private static void merge(int[] array, int p, int q, int r) {
+		ArrayList<Integer> subarray1 = new ArrayList<Integer>(), subarray2 = new ArrayList<Integer>();
+		// copy each of the subarrays
+		for (int i = p; i <= q; i++) subarray1.add(array[i]);
+		for (int i = q + 1; i <= r; i++) subarray2.add(array[i]);
+		// add sentinel values onto ends
+		subarray1.add(Integer.MAX_VALUE);
+		subarray2.add(Integer.MAX_VALUE);
+		// merge the elements of the two copied arrays into array[p...r]
+		for (int i = p; i <= r; i++) {
+			if (subarray1.get(0) <= subarray2.get(0)) {
+				array[i] = subarray1.get(0);
+				subarray1.remove(0);
+			} else {
+				array[i] = subarray2.get(0);
+				subarray2.remove(0);
+			}
+		}
+	}
+	
+	
+
+}

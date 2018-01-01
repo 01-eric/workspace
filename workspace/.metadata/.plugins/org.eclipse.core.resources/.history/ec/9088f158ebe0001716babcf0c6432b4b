@@ -1,0 +1,24 @@
+import java.io.*;
+import java.util.*;
+
+public class Castle{
+	
+	public static void main(String[] args) throws IOException {
+		// Scanner scanner = new Scanner(new File("maxcross.in"));
+		PrintWriter out = new PrintWriter(new BufferedWriter(new FileWriter("maxcross.out")));
+		Scanner scanner = new Scanner(System.in);
+		int[][] rooms = new int[scanner.nextInt()][scanner.nextInt()], walls = new int[rooms.length][rooms[0].length];
+		for (int j = 0; j < walls[0].length; j++) for (int i = 0; i < walls.length; i++) walls[i][j] = scanner.nextInt();
+		
+		for (int j = 0; j < walls[0].length; j++) {
+			for (int i = 0; i < walls.length; i++) {
+				System.out.print(walls[i][j] + (i >= 10 ? " " : "  "));
+			} System.out.println();
+		}
+		scanner.close();
+		
+		System.out.println();
+		out.close();
+	}
+
+}

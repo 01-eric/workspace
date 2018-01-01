@@ -1,0 +1,11 @@
+import java.util.Scanner;
+
+public class FirstClass {
+
+	public static void main(String[] args) {
+		Scanner lul = new Scanner(System.in);
+		String input = lul.nextLine();
+		int n = Integer.parseInt(input);
+	}
+
+}

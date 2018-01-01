@@ -1,0 +1,4 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<session version="1.0">
+<refactoring comment="Rename local variable &apos;input&apos; in &apos;Puzzle.main(...)&apos; to &apos;pieces&apos;&#x0D;&#x0A;- Original project: &apos;ACSL 2016-17 Intermediate Division&apos;&#x0D;&#x0A;- Original element: &apos;Puzzle.main(String[]).input&apos;&#x0D;&#x0A;- Renamed element: &apos;input&apos;&#x0D;&#x0A;- Update references to refactored element" description="Rename local variable &apos;input&apos;" id="org.eclipse.jdt.ui.rename.local.variable" input="/src&lt;{Puzzle.java[Puzzle~main~\[QString;@input!168!215!177!181!\[QString;!0!false" name="pieces" references="true" stamp="1495931387147" version="1.0"/>
+</session>

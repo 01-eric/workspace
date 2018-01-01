@@ -1,0 +1,13 @@
+import java.io.*;
+
+public class InstaData {
+	
+	public InstaData() {
+		BufferedReader br = new BufferedReader(new File("data.txt"));
+	}
+	
+	public static void main(String[] args) {
+		new InstaData();
+	}
+
+}

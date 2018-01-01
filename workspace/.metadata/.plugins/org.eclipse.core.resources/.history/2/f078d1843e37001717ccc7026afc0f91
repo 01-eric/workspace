@@ -1,0 +1,81 @@
+import java.awt.*;
+import java.awt.event.*;
+import javax.swing.*;
+
+public class Traffic implements ActionListener, Runnable {
+	
+	JFrame frame = new JFrame("Traffic Simulation");
+	JButton start = new JButton("Start");
+	JButton semi = new JButton("Add Semi");
+	JButton suv = new JButton("Add SUV");
+	JButton sportsCar = new JButton("Add Sports Car");
+	Container west = new Container();
+	Road road = new Road();
+	boolean running = false;
+	
+	public Traffic() {
+		frame.setVisible(true);
+		frame.setSize(new Dimension(Road.LENGTH, 550));
+		frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+		frame.setLayout(new BorderLayout());
+		start.addActionListener(this);
+		west.setLayout(new GridLayout(3, 1));
+		west.add(semi);
+		west.add(suv);
+		west.add(sportsCar);
+		semi.addActionListener(this);
+		suv.addActionListener(this);
+		sportsCar.addActionListener(this);
+		frame.add(west, BorderLayout.WEST);
+		frame.add(start, BorderLayout.SOUTH);
+		frame.add(road, BorderLayout.CENTER);
+		// road.addCar(new Semi(10, 50), new SUV(10, 170), new SportsCar(10, 290)); no repaint? when referring to superclass, are child class methods visible?
+	}
+	
+	public static void main(String[] args) {
+		new Traffic();
+	}
+
+	@Override
+	public void actionPerformed(ActionEvent e) {
+		JButton eventSource = (JButton)e.getSource();
+		if (eventSource.equals(start)) {
+			running = !running;
+			if (eventSource.getText().equals("Start")) eventSource.setText("Stop");
+			else eventSource.setText("Start");
+			new Thread(this).start();
+		} else {
+			Vehicle newVehicle;
+			if (e.getSource().equals(semi)) newVehicle = new Semi(0, Road.LANE_HEIGHT / 2 - Semi.HEIGHT / 2);
+			else newVehicle = e.getSource().equals(suv) ? new SUV(0, Road.LANE_HEIGHT / 2 - SUV.HEIGHT / 2) : new SportsCar(0, Road.LANE_HEIGHT / 2 - SportsCar.HEIGHT / 2);
+			road.addCar(newVehicle);
+			for (int x = 0; x < Road.WIDTH; x += 20) {
+				for (int y = Road.LANE_HEIGHT / 2 - Semi.HEIGHT / 2; y < Road.LANE_HEIGHT * 4; y += Road.LANE_HEIGHT) {
+					newVehicle.setX(x);
+					newVehicle.setY(y);
+					if (!road.collision(x, y, newVehicle.getWidth(), newVehicle)) {
+						frame.repaint();
+						return;
+					}
+				}
+			}
+		}
+		
+	}
+
+	@Override
+	public void run() {
+		while (running) {
+			road.step();
+			frame.repaint();
+			try {
+				Thread.sleep(100);
+			} catch (Exception e) {
+				e.printStackTrace();
+			}
+		}
+	}
+	
+	
+
+}

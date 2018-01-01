@@ -1,0 +1,4 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<session version="1.0">
+<refactoring comment="Rename method &apos;Permutations.combination(...)&apos; to &apos;permutationLength&apos;&#x0D;&#x0A;- Original project: &apos;Miscellaneous Files&apos;&#x0D;&#x0A;- Original element: &apos;Permutations.combination(...)&apos;&#x0D;&#x0A;- Renamed element: &apos;Permutations.permutationLength(...)&apos;&#x0D;&#x0A;- Update references to refactored element" delegate="false" deprecate="false" description="Rename method &apos;combination&apos;" flags="589826" id="org.eclipse.jdt.ui.rename.method" input="/src&lt;{Permutations.java[Permutations~combination~QString;~QString;~I" name="permutationLength" references="true" stamp="1493776882303" version="1.0"/>
+</session>

@@ -1,0 +1,10 @@
+
+public class FirstClass {
+
+	public static void main(String[] args) {
+		String str = "This String has 35 characters.";
+		boolean myBoolean = str.length() == 30;
+		System.out.println(myBoolean);
+	}
+
+}

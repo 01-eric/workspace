@@ -1,0 +1,26 @@
+import java.util.*;
+
+public class Stamps2 {
+
+	public static void main(String[] args) {
+		Scanner scanner = new Scanner(System.in);
+		int limit = scanner.nextInt(), maxValueStamp = 0;
+		int[] stamps = new int[scanner.nextInt()];
+		for (int i = 0; i < stamps.length; i++) {
+			stamps[i] = scanner.nextInt();
+			maxValueStamp = Math.max(maxValueStamp, stamps[i]);
+		} int[] dp = new int[maxValueStamp * limit + 1];
+		for (int i = 0; i < dp.length; i++) {
+			int minPrevSolution = Integer.MAX_VALUE;
+			for (int stampValue : stamps) if (i - stampValue >= 0) minPrevSolution = Math.min(minPrevSolution, dp[i - stampValue]);
+			if (minPrevSolution != Integer.MAX_VALUE) dp[i] = 1 + minPrevSolution;
+		} System.out.println(Arrays.toString(dp));
+	}
+	
+}
+
+/*
+5 2
+1 3
+
+*/

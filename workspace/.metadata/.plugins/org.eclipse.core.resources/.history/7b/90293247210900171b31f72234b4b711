@@ -1,0 +1,41 @@
+/*
+ ID: eric.111
+ LANG: JAVA
+ TASK: namenum
+ */
+
+import java.io.*;
+import java.util.*;
+
+public class namenum {
+
+	public static void main(String[] args) throws IOException {
+		/* Scanner scanner = new Scanner(new File("namenum.in"));
+		PrintWriter out = new PrintWriter(new BufferedWriter(new FileWriter("namenum.out"))); */
+		Scanner scanner = new Scanner(System.in);
+		// create list of acceptable names
+		BufferedReader br = new BufferedReader(new FileReader("namenumdict.txt"));
+		ArrayList<String> acceptedNames = new ArrayList<String>();
+		while (true) {
+			String str = br.readLine();
+			if (str == null) break;
+			else acceptedNames.add(str);
+		} // create an array for ease of translating code
+		char[][] serialCode = new char[8][3];
+		int temp = 65;
+		for (int i = 0; i < serialCode.length; i++) {
+			for (int j = 0; j < serialCode[0].length; j++) {
+				serialCode[i][j] = (char)temp;
+				temp = temp == 80 ? temp + 2 : temp + 1;
+			}
+		} for (int i = 0; i < serialCode.length; i++) {
+			System.out.print(i + 2);
+			for (int j = 0; j < serialCode[0].length; j++) {
+				System.out.print(serialCode[i][j]);
+			} System.out.println();
+		}
+	}
+
+}
+
+// acceptedNames.get(i).contains("A") || acceptedNames.get(i).contains("E") || acceptedNames.get(i).contains("I") || acceptedNames.get(i).contains("O") || acceptedNames.get(i).contains("U") || acceptedNames.get(i).contains("Y")

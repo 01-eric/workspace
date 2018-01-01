@@ -1,0 +1,20 @@
+import java.util.*;
+
+public class Agram {
+	
+	public Agram() {
+		Scanner scanner = new Scanner(System.in);
+		String[] cards = scanner.nextLine().split(", ");
+		for (int i = 0; i < cards.length; i++) {
+			System.out.println(cards[i]);
+		}
+	}
+	
+	public static void main(String[] args) {
+		new Agram();
+	}
+	
+	public boolean hasSuite(String[] array) {
+		char suite = array[0].charAt(1);
+	}
+}

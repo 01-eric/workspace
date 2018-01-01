@@ -1,0 +1,4 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<session version="1.0">
+<refactoring comment="Move element &apos;Pasture.java&apos; to &apos;USACO 2016-17 Bronze Contest #1/src&apos;&#x0D;&#x0A;- Original project: &apos;ACSL 2016-17 Intermediate Division #1 - Agram&apos;&#x0D;&#x0A;- Destination element: &apos;USACO 2016-17 Bronze Contest #1/src&apos;&#x0D;&#x0A;- Original element: &apos;Pasture.java&apos;&#x0D;&#x0A;- Update references to refactored element" description="Move compilation unit" destination="=USACO 2016-17 Bronze Contest \#1/src" element1="/src&lt;{Pasture.java" files="0" flags="589830" folders="0" id="org.eclipse.jdt.ui.move" policy="org.eclipse.jdt.ui.moveResources" qualified="false" references="true" stamp="1482078178758" units="1" version="1.0"/>
+</session>

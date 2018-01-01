@@ -1,0 +1,32 @@
+
+public class MOZ {
+	
+	public static void main(String[] args) {
+		
+		int[][] grid = new int[20][16];
+		int[] center = {(int)(Math.random() * 17) + 2, (int)(Math.random() * 13) + 2};
+		
+		// set all values to 1
+		for (int i = 0; i < grid.length; i++) for (int j = 0; j < grid[0].length; j++) grid[i][j] = 1;
+		
+		// set center to 10
+		grid[center[0]][center[1]] = 10;
+		for (int i = center[0] - 1; i < center[0] + 2; i++) {
+			
+		}
+		
+		print(grid);
+		
+	}
+	
+	static void print(int[][] array) {
+		for (int i = 0; i < array.length; i++) {
+			for (int j = 0; j < array[0].length; j++) System.out.print(Integer.toHexString(array[i][j]).toUpperCase());
+			System.out.println();
+		}
+	}
+
+}
+
+// center between 7-8,9-10
+

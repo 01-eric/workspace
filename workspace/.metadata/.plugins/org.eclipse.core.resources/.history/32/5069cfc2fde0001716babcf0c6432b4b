@@ -1,0 +1,51 @@
+import java.io.*;
+import java.util.*;
+
+public class Castle{
+	
+	public static void main(String[] args) throws IOException {
+		// Scanner scanner = new Scanner(new File("maxcross.in"));
+		PrintWriter out = new PrintWriter(new BufferedWriter(new FileWriter("maxcross.out")));
+		Scanner scanner = new Scanner(System.in);
+		String[] input = scanner.nextLine().split(" ");
+		int[][] rooms = new int[Integer.parseInt(input[1])][Integer.parseInt(input[0])], walls = new int[rooms.length][rooms[0].length];
+		for (int i = 0; i < walls.length; i++) for (int j = 0; j < walls[0].length; j++) walls[i][j] = scanner.nextInt();
+		/* for (int i = 0; i < walls.length; i++) {	
+		   	for (int j = 0; j < walls[0].length; j++) {
+				System.out.print(walls[i][j] + (walls[i][j] >= 10 ? " " : "  "));
+			} System.out.println();
+		} */
+		scanner.close();
+		ArrayList<Integer> unvisited = new ArrayList<Integer>(rooms.length * rooms[0].length);
+		for (int i = 0; i < rooms.length * rooms[0].length; i++) unvisited.add(i); // keep track of all unvisited rooms
+		for (int roomNumber = 0; unvisited.size() > 0; roomNumber++) {
+			// every iteration should dfs one complete room, increment roomNumber only after this loop
+			visit(unvisited.get(0), roomNumber, rooms, walls, unvisited);
+		}
+		
+		
+		System.out.println();
+		out.close();
+	}
+	
+	static void visit(int index, int roomNumber, int[][] rooms, int[][] walls, ArrayList<Integer> unvisited) { // index is square to visit, roomNumber is number to mark square part of
+		rooms[index / rooms[0].length][index % rooms[0].length] = roomNumber;
+		unvisited.remove((Object)new Integer(index));
+		String bin = Integer.toBinaryString(walls[index / rooms[0].length][index % rooms[0].length]);
+		System.out.println(bin);
+		// if room is not on left exterior wall, binary last bit is 0 (no wall), and room to left is unvisited
+		if (index % rooms[0].length != 0 && bin.length() >= 1 && bin.charAt(bin.length() - 1) == '0' && unvisited.contains(index - 1)) {
+			System.out.println(index + " has exit to west");
+		}
+	}
+
+
+}
+
+/*
+7 4
+11 6 11 6 3 10 6
+7 9 6 13 5 15 5
+1 10 12 7 13 7 5
+13 11 10 8 10 12 13
+*/

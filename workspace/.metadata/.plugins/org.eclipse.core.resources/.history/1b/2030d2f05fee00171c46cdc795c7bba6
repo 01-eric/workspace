@@ -1,0 +1,30 @@
+import java.util.*;
+
+public class LongestPrefix {
+	
+	public static void main(String[] args) {
+		Scanner scanner = new Scanner(System.in);
+		ArrayList<String> primitives = new ArrayList<String>();
+		StringBuilder string = new StringBuilder(200000);
+		while (true) {
+			String s = scanner.next();
+			if (s.equals(".")) break;
+			primitives.add(s);
+		} scanner.nextLine();
+		while(true) {
+			String s = scanner.nextLine();
+			if (s.equals("")) break;
+			else string.append(s);
+		}
+	}
+
+}
+
+/*
+A AB BA 
+CA BBC
+.
+ABABACA
+BAABC
+
+*/

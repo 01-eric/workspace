@@ -1,0 +1,4 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<session version="1.0">
+<refactoring comment="Rename local variable &apos;semi&apos; in &apos;Traffic.actionPerformed(...)&apos; to &apos;newVehicle&apos;&#x0D;&#x0A;- Original project: &apos;Traffic Simulation&apos;&#x0D;&#x0A;- Original element: &apos;Traffic.actionPerformed(ActionEvent).semi&apos;&#x0D;&#x0A;- Renamed element: &apos;semi&apos;&#x0D;&#x0A;- Update references to refactored element" description="Rename local variable &apos;semi&apos;" id="org.eclipse.jdt.ui.rename.local.variable" input="/src&lt;{Traffic.java[Traffic~actionPerformed~QActionEvent;@semi!1564!1630!1572!1575!QVehicle;!0!false" name="newVehicle" references="true" stamp="1494555463657" version="1.0"/>
+</session>

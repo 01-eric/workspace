@@ -1,0 +1,32 @@
+/*
+ * Followers before following; every piece of data
+ * separated by one blank new line
+ */
+
+import java.io.*;
+import java.util.*;
+
+public class InstaData {
+	
+	private ArrayList<String> followers = new ArrayList<String>(), following = new ArrayList<String>();
+	
+	public InstaData() throws Exception {
+		BufferedReader br = new BufferedReader(new FileReader("data.txt"));
+		boolean status = false;
+		while (true) {
+			String s = br.readLine();
+			if (s == null) break;
+			if (s.length() == 0) {
+				s = br.readLine();
+				if (s.equals("Following")) status = true;
+				else if (status) following.add(s);
+				else followers.add(s);
+			}
+		} System.out.println(followers.size() + " " + following.size());
+	}
+	
+	public static void main(String[] args) throws Exception {
+		new InstaData();
+	}
+
+}

@@ -1,0 +1,33 @@
+import java.util.*;
+
+public class Agram {
+	
+	Scanner scanner = new Scanner(System.in);
+	ArrayList<String> sameSuite = new ArrayList<String>();
+	
+	public Agram() {
+		for (int runs = 0; runs < 5; runs++) {
+			String[] cards = scanner.nextLine().split(", ");
+			if (hasSuite(cards)) {
+				System.out.println(true);
+			} else {
+				
+			}
+		}
+	}
+	
+	public static void main(String[] args) {
+		new Agram();
+	}
+	
+	public boolean hasSuite(String[] array) {
+		char suite = array[0].charAt(1);
+		boolean b = false;
+		for (int index = 1; index < array.length; index++) {
+			if (array[index].contains(Character.toString(suite))) {
+				sameSuite.add(array[index]);
+				b = true;
+			}
+		} return b;
+	}
+}

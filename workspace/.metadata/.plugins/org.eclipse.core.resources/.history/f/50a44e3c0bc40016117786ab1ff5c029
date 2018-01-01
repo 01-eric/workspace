@@ -1,0 +1,24 @@
+import java.util.*;
+
+public class Agram {
+	Scanner scanner = new Scanner(System.in);
+	public Agram() {
+		for (int runs = 0; runs < 5; runs++) {
+			String[] cards = scanner.nextLine().split(", ");
+			System.out.println(hasSuite(cards));
+		}
+	}
+	
+	public static void main(String[] args) {
+		new Agram();
+	}
+	
+	public boolean hasSuite(String[] array) {
+		char suite = array[0].charAt(1);
+		for (int index = 1; index < array.length; index++) {
+			if (array[index].contains(Character.toString(suite))) {
+				return true;
+			}
+		} return false;
+	}
+}

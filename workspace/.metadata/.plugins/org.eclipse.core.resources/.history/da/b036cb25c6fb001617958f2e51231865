@@ -1,0 +1,22 @@
+
+public class FirstClass {
+
+	public static void main(String[] args) {
+		/*
+		 * There are two team captains on a soccer team. Miguel is #9 and Jake is #17.
+		 * If int number is equal to 17 set String captain = "Jake"; if int number = 9 then
+		 * set String captain = "Miguel" otherwise set it equal to "wat"
+		 */
+		String string = "boosted";
+		if (string.equals("Boosted")) {
+			System.out.println(string);
+		} else if (string.length() == 7) {
+			System.out.println(string.length());
+		} else if (string.contains("B")){
+			System.out.println("B");
+		} else {
+			System.out.println("ur bad");
+		} System.out.println("_________________________");
+	}
+
+}

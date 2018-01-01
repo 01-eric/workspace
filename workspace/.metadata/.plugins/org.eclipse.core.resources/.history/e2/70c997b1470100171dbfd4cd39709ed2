@@ -1,0 +1,14 @@
+import java.util.Scanner;
+
+public class FirstClass {
+	/*
+	 * Type in 2 numbers, followed by a new line. Print out their product.
+	 */
+	public static void main(String[] args) {
+		Scanner sc = new Scanner(System.in);
+		int firstNumber = Integer.parseInt(sc.nextLine());
+		int secondNumber = Integer.parseInt(sc.nextLine());
+		System.out.println(firstNumber * secondNumber);
+	}
+
+}

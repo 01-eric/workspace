@@ -1,0 +1,38 @@
+import java.util.*;
+import java.awt.*;
+
+public class CrazyFences {
+
+	public static void main(String[] args) {
+		ArrayList<ArrayList<Point>> shapes = new ArrayList<ArrayList<Point>>();
+		Scanner scanner = new Scanner(System.in);
+		Point[][] edges = new Point[scanner.nextInt()][2];
+		Point[] cows = new Point[scanner.nextInt()];
+		for (int i = 0; i < edges.length; i++) edges[i] = new Point[] {new Point(scanner.nextInt(), scanner.nextInt()), new Point(scanner.nextInt(), scanner.nextInt())};
+		for (int i = 0; i < cows.length; i++) cows[i] = new Point(scanner.nextInt(), scanner.nextInt());
+		scanner.close();
+		
+		for (Point[] a : edges) System.out.println(Arrays.toString(a));
+		for (Point i : cows) System.out.println(i);
+	}
+	
+}
+
+/*
+10 4
+0 0 10 0
+10 0 10 10
+0 0 0 10
+10 10 0 10
+8 8 9 8
+9 8 8 9
+8 9 8 8
+2 7 3 2
+3 2 7 5
+7 5 2 7
+15 3
+1 4
+4 5
+7 1
+
+*/

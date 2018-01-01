@@ -1,0 +1,62 @@
+class Class extends Machine {
+	
+	/*
+	 * Empty Class with no fields or methods
+	 */
+	
+}
+
+class Machine {
+	
+	void startMachine() {
+		System.out.println("Machine started.");
+	}
+	
+	void stopMachine() {
+		System.out.println("Machine stopped.");
+	}
+	
+}
+
+class Car extends Machine {
+	
+	@Override
+	void startMachine() {
+		System.out.println("Car started.");
+	}
+	
+	
+	/*
+	 * super keyword refers to the method contained in the superclass.
+	 */
+	int getHashCode() {
+		return super.hashCode();
+	}
+	
+}
+
+public class Inheritance {
+
+	public static void main(String[] args) {
+		
+		Class newClass = new Class();
+		/*
+		 * Class is a blank class with no methods or fields
+		 * but it has already inherited all methods from class
+		 * "Object" because it is its superclass so I can use
+		 * all methods from Object with Class too (newClass.hashCode);
+		 * Additionally, aside from Object, you can inherit more
+		 * methods into a class by using the "extends" keyword.
+		 * Here, Class has become a subclass of Machine and now
+		 * inherits all methods from Machine too. Machine is now
+		 * considered a superclass of Class.
+		 */
+		System.out.println(newClass.hashCode());
+		newClass.startMachine(); // inherited from Machine
+		Car car = new Car();
+		car.startMachine(); // use @Override to override the superclass method with same name
+		System.out.println(car.getHashCode() + " " + car.hashCode());
+		
+	}
+	
+}

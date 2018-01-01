@@ -1,0 +1,68 @@
+import java.util.*;
+
+public class activityselection {
+	
+	public static void main(String[] args) {
+		// initialization code
+		Scanner scanner = new Scanner(System.in);
+		int N = Integer.parseInt(scanner.nextLine());
+		int[][] grazingZones = new int[N][2];
+		int minEnd = Integer.MAX_VALUE, maxEnd = Integer.MIN_VALUE;
+		for (int i = 0; i < N; i++) {
+			String[] temp = scanner.nextLine().split(" ");
+			grazingZones[i][0] = Integer.parseInt(temp[0]);
+			grazingZones[i][1] = Integer.parseInt(temp[1]);
+			minEnd = Math.min(minEnd, grazingZones[i][1]);
+			maxEnd = Math.max(maxEnd, grazingZones[i][1]);
+		} grazingZones = twoDimCountingSort(minEnd, maxEnd, grazingZones); // sort both arrays based on endTimes
+		int prev = 0, count = 1; // iterate through all activities keeping track of the previous activity's end time
+		// first event always counted; start at event 2 (index 1) initialize count = 1 and current = 1
+		for (int current = 1; current < N; current++) {
+			if (grazingZones[current][0] >= grazingZones[current][1]) {
+				count++;
+				prev = current;
+			}
+		} System.out.println(count);
+		
+	}
+	
+	/*
+	 * Sorts according to array1, so array2 may not be sorted but will 
+	 * be in same order as array1. assume array1.length = array2.length
+	 */
+	static void dualInsertionSort(int[] array1, int[] array2) {
+		for (int i = 1; i < array1.length; i++) {
+			for (int j = i; j > 0 && array1[j] < array1[j - 1]; j--) {
+				swapElements(array1, j, j - 1);
+				swapElements(array2, j, j - 1);
+			}
+		}
+	}
+	
+	private static void swapElements(int[] array, int index1, int index2) {
+		int temp = array[index1];
+		array[index1] = array[index2];
+		array[index2] = temp;
+	}
+	
+	static int[][] twoDimCountingSort(int min, int max, int[][] array) {
+		if (array.length == 0) return array;
+		int[] count = new int[max - min + 1];
+		int[][] output = new int[array.length][array[0].length];
+		for (int i = 0; i < array.length; i++) count[array[i][1] - min]++;
+		for (int i = 1; i < count.length; i++) count[i] += count[i - 1];
+		for (int i = array.length - 1; i >= 0; i--) output[count[array[i][1] - min]-- - 1] = array[i];
+		return output;
+	}
+
+}
+
+/*
+5
+2 4
+1 12
+4 5
+7 10
+7 8
+
+*/

@@ -1,0 +1,27 @@
+import java.util.Scanner;
+import java.io.*;
+
+public class Moocast {
+
+	public Moocast() throws IOException {
+		/* File text = new File("moocast.in");
+		Scanner scanner = new Scanner(text);
+		PrintWriter out = new PrintWriter(new BufferedWriter(new FileWriter("moocast.out"))); */
+		Scanner scanner = new Scanner(System.in);
+		int cowCount = Integer.parseInt(scanner.nextLine());
+		int[][] cows = new int[cowCount][3];
+		for (int i = 0; i < cowCount; i++) {
+			String[] temp = scanner.nextLine().split(" ");
+			cows[i][0] = Integer.parseInt(temp[0]);
+			cows[i][1] = Integer.parseInt(temp[1]);
+			cows[i][2] = Integer.parseInt(temp[2]);
+		} for (int i = 0; i < cows.length; i++) {
+			System.out.println(cows[i][0] + " " + cows[i][1] + " " + cows[i][2]);
+		}
+	}
+	
+	public static void main(String[] args) throws IOException {
+		new Moocast();
+	}
+
+}

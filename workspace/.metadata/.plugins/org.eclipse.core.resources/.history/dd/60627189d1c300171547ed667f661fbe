@@ -1,0 +1,62 @@
+/*
+ ID: eric.111
+ LANG: JAVA
+ TASK: wormhole
+ */
+
+import java.awt.Point;
+import java.io.*;
+import java.util.*;
+
+/*
+ * Recursively generate all permutations (of pairs) of
+ * n <= 12 wormholes.
+ */
+
+public class wormhole {
+	
+	static LinkedList<Pair[]> pairings = new LinkedList<Pair[]>();
+	static int output;
+	
+	public static void main(String[] args) throws IOException {
+		Scanner scanner = new Scanner(new File("wormhole.in"));
+		PrintWriter out = new PrintWriter(new BufferedWriter(new FileWriter("wormhole.out")));
+		// Scanner scanner = new Scanner(System.in);
+		int n = scanner.nextInt();
+		ArrayList<Point> wormholes = new ArrayList<Point>(n);
+		for (int i = 0; i < n; i++) wormholes.add(new Point(scanner.nextInt(), scanner.nextInt()));
+		findPairs(new ArrayList<Pair>(), wormholes);
+		
+		
+		System.out.println();
+		out.close();
+	}
+	
+	static void findPairs(ArrayList<Pair> prefix, ArrayList<Point> remainingPoints) {
+		if (remainingPoints.size() < 2 /*could be 1 unpaired*/) { 
+			for (Pair p: prefix) System.out.println(p.start + " " + p.end);
+			System.out.println();
+		} else {
+			for (int i = 0; i < remainingPoints.size() - 1; i++) {
+				ArrayList<Pair> copyOfPrefix = new ArrayList<Pair>(prefix);
+				ArrayList<Point> copyOfRemainingPoints = new ArrayList<Point>(remainingPoints);
+				copyOfPrefix.add(new Pair(copyOfRemainingPoints.remove(0), copyOfRemainingPoints.remove(i)));
+				findPairs(copyOfPrefix, copyOfRemainingPoints);
+			}
+		}
+		
+	}
+	
+	
+}
+
+class Pair {
+	
+	Point start, end; 
+	
+	Pair(Point start, Point end) {
+		this.start = start;
+		this.end = end;
+	}
+	
+}

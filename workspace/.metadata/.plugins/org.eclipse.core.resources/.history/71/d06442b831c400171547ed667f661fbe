@@ -1,0 +1,85 @@
+/*
+ ID: eric.111
+ LANG: JAVA
+ TASK: wormhole
+ */
+
+import java.awt.Point;
+import java.io.*;
+import java.util.*;
+
+/*
+ * Recursively generate all permutations (of pairs) of
+ * n <= 12 wormholes.
+ */
+
+public class wormhole {
+	
+	static int output;
+	
+	public static void main(String[] args) throws IOException {
+		Scanner scanner = new Scanner(new File("wormhole.in"));
+		PrintWriter out = new PrintWriter(new BufferedWriter(new FileWriter("wormhole.out")));
+		// Scanner scanner = new Scanner(System.in);
+		int n = scanner.nextInt();
+		ArrayList<Point> wormholes = new ArrayList<Point>(n);
+		for (int i = 0; i < n; i++) wormholes.add(new Point(scanner.nextInt(), scanner.nextInt()));
+		findPairs(new ArrayList<Pair>(), wormholes);
+		
+		System.out.println();
+		out.close();
+	}
+	
+	static void findPairs(ArrayList<Pair> prefix, ArrayList<Point> remainingPoints) {
+		if (remainingPoints.size() < 2 /*could be 1 unpaired*/) { 
+			Pair[] pairing = new Pair[prefix.size()];
+			for (int i = 0; i < pairing.length; i++) pairing[i] = prefix.remove(0);
+			hasCycle(pairing);
+			for (int i = 0; i < pairing.length; i++) System.out.println(pairing[i].start + " " + pairing[i].end);
+			System.out.println();
+		} else {
+			for (int i = 0; i < remainingPoints.size() - 1; i++) {
+				ArrayList<Pair> copyOfPrefix = new ArrayList<Pair>(prefix);
+				ArrayList<Point> copyOfRemainingPoints = new ArrayList<Point>(remainingPoints);
+				copyOfPrefix.add(new Pair(copyOfRemainingPoints.remove(0), copyOfRemainingPoints.remove(i)));
+				findPairs(copyOfPrefix, copyOfRemainingPoints);
+			}
+		}
+		
+	}
+	
+	static boolean hasCycle(Pair[] pairing) {
+		int[] nextToRight = new int[pairing.length]; // array denoting the INDEX of the pair which is next in the cycle
+		// sort by pair.start.getX() then pair.start.getY() to find pairs by their starting point's y location
+		for (int i = 1; i < pairing.length; i++) for (int j = i; j > 0 && pairing[j].start.getX() < pairing[j - 1].start.getX(); j--) swap(j, j - 1, pairing);
+		for (int i = 1; i < pairing.length; i++) for (int j = i; j > 0 && pairing[j].start.getY() < pairing[j - 1].start.getY(); j--) swap(j, j - 1, pairing);
+		// find each pair that comes next in the cycle
+		for (int i = 0; i < pairing.length; i++) {
+			nextToRight[i] = -1;
+			for (int j = 0; j < pairing.length; j++) {
+				if (pairing[j].start.getY() == pairing[i].end.getY() && pairing[j].start.getX() > pairing[i].end.getX()) nextToRight[i] = j;
+				break;
+			} System.out.print(nextToRight[i] + " ");
+		} System.out.println();
+		return false;				
+	}
+	
+	static void swap(int index1, int index2, Pair[] array) {
+		Pair temp = array[index1];
+		array[index1] = array[index2];
+		array[index2] = temp;
+	}
+	
+	
+}
+
+class Pair {
+	
+	Point start, end; 
+	
+	Pair(Point start, Point end) {
+		this.start = start;
+		this.end = end;
+	}
+	
+}

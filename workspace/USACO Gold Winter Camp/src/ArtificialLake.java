@@ -1,0 +1,65 @@
+import java.util.*;
+import java.awt.Point;
+
+public class ArtificialLake {
+	
+	public static void main(String[] args) {
+		Scanner scanner = new Scanner(System.in);
+		int numSections = scanner.nextInt();
+		TreeMap<Integer, Point> sections = new TreeMap<Integer, Point>(); // width and height in point
+		long[] timeFilled = new long[numSections]; // keep track of when each level is filled
+		int minHeight = Integer.MAX_VALUE, minHeightIndex = -1;
+		for (int i = 0; i < numSections; i++) {
+			int width = scanner.nextInt(), height = scanner.nextInt();
+			sections.put(i, new Point(width, height));
+			if (height < minHeight) {
+				minHeight = height;
+				minHeightIndex = i;
+			}
+		} scanner.close();
+		sections.put(-1, new Point(Integer.MAX_VALUE, Integer.MAX_VALUE)); // infinite wall at beginning
+		sections.put(numSections, new Point(Integer.MAX_VALUE, Integer.MAX_VALUE)); // infinite wall at end
+		
+		int time = 0;
+		while (sections.size() >= 3) {
+			// find points left and right of current one to determine whether or not to treat as minimum height section
+			Point left = sections.get(sections.floorKey(minHeightIndex - 1)), right = sections.get(sections.ceilingKey(minHeightIndex + 1)), current = sections.get(minHeightIndex);
+			if (current.getY() < right.getY() && current.getY() < left.getY()) { // really is minimum height
+				timeFilled[minHeightIndex] = time + (long)current.getX();
+				if (left.getY() < right.getY()) {
+					left.setLocation(left.getX() + current.getX(), left.getY()); // merge with left
+					sections.remove(minHeightIndex); // remove current
+					minHeightIndex = sections.floorKey(minHeightIndex); // move left
+					time += current.getX() * (left.getY() - current.getY());
+				} else {
+					right.setLocation(right.getX() + current.getX(), right.getY()); // merge with right
+					sections.remove(minHeightIndex); // remove current
+					minHeightIndex = sections.ceilingKey(minHeightIndex);
+					time += current.getX() * (right.getY() - current.getY());
+				}
+			} else if (current.getY() < right.getY()) minHeightIndex = sections.floorKey(minHeightIndex - 1); // otherwise move left
+			else minHeightIndex = sections.ceilingKey(minHeightIndex + 1); // or move right
+		} System.out.println(Arrays.toString(timeFilled));
+	}
+
+}
+
+/*
+3
+4 2
+2 7
+6 4
+
+* |          *      *     |      *      *            *
+* V          *      *     V      *      *            *
+*            *      *    ....    *      *~~~~~~~~~~~~*
+*    **      *      *~~~~** :    *      *~~~~**~~~~~~*
+*    **      *      *~~~~** :    *      *~~~~**~~~~~~*
+*    **      *      *~~~~**~~~~~~*      *~~~~**~~~~~~*
+*    *********      *~~~~*********      *~~~~*********
+*~~~~*********      *~~~~*********      *~~~~*********
+**************      **************      **************
+**************      **************      **************
+
+Output: 4 50 26
+*/

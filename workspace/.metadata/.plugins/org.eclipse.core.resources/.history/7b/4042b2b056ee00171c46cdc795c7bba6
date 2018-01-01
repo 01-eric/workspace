@@ -1,0 +1,25 @@
+import java.util.*;
+
+public class BuyHay {
+
+	public static void main(String[] args) {
+		Scanner scanner = new Scanner(System.in);
+		double[] values = new double[scanner.nextInt()];
+		int[][] supply = new int[values.length][2]; // amount, then cost
+		int required = scanner.nextInt();
+		for (int i = 0; i < supply.length; i++) {
+			supply[i] = new int[] {scanner.nextInt(), scanner.nextInt()};
+			values[i] = supply[i][1] / supply[i][0];
+			System.out.println(values[i]);
+		}
+	}
+	
+}
+
+/*
+2 15
+3 2
+5 3
+
+
+*/

@@ -1,0 +1,30 @@
+import java.util.*;
+
+public class Mountain {
+	
+	public static void main(String[] args) {
+		Scanner scanner = new Scanner(System.in);
+		int[] measurements = new int[scanner.nextInt()];
+		for (int i = 0; i < measurements.length; i++) measurements[i] = scanner.nextInt();
+		scanner.close();
+		
+		int[] dp_fwd = new int[measurements.length + 1] /*extra space at front*/, dp_rev = new int[measurements.length + 1] /*extra space at back*/;
+		for (int i = 2; i < measurements.length; i++) {
+			if (measurements[i] >= measurements[i - 1]) dp_fwd[i - 1] = dp_fwd[i - 2] + 1;
+			if (measurements[measurements.length - 1 - i] >= measurements[measurements.length - i]) dp_rev[dp_rev.length - i] = dp_rev[dp_rev.length + 1 - i] + 1;
+		} System.out.println(Arrays.toString(measurements)); 
+		System.out.println(Arrays.toString(dp_fwd));
+		System.out.println(Arrays.toString(dp_rev));
+		
+	}
+
+}
+
+/*
+7
+3 2 3 5 4 1 6
+
+70
+3 2 1 1 1 1 2 3 3 3 6 7 7 7 7 7 7 7 6 5 4 3 3 3 2 1 1 1 1 1 2 3 4 4 4 5 6 7 6 5 4 3 2 1 1 1 2 1 2 1 1 1 1 1 2 3 4 3 2 3 2 1 1 1 1 1 1 2 1 1
+*/
+

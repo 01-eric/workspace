@@ -1,0 +1,27 @@
+import java.io.*;
+import java.util.*;
+
+public class transform {
+	
+	public static void main(String[] args) throws IOException {
+		/* Scanner scanner = new Scanner(new File("milk2.in"));
+		PrintWriter out = new PrintWriter(new BufferedWriter(new FileWriter("milk2.out"))); */
+		Scanner scanner = new Scanner(System.in);
+		int dimensions = Integer.parseInt(scanner.nextLine());
+		char[][] preImage = new char[dimensions][dimensions];
+		char[][] postImage = new char[dimensions][dimensions];
+		for (int i = 0; i < preImage.length; i++) {
+			String line = scanner.nextLine();
+			for (int j = 0; j < preImage[0].length; j++) preImage[i][j] = line.charAt(j);
+		} for (int i = 0; i < postImage.length; i++) {
+			String line = scanner.nextLine();
+			for (int j = 0; j < postImage[0].length; j++) postImage[i][j] = line.charAt(j);
+		} System.out.println(equals(preImage, postImage));
+	}
+	
+	static boolean equals(char[][] array1, char[][] array2) {
+		for (int i = 0; i < array1.length; i++) for (int j = 0; j < array1[0].length; j++) if (array1[i][j] != array2[i][j]) return false;
+		return true;
+	}
+
+}

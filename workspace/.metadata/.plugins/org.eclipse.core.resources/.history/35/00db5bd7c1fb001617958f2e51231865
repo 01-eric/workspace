@@ -1,0 +1,15 @@
+
+public class FirstClass {
+
+	public static void main(String[] args) {
+		String s = "...";
+		s += "!!!";
+		int a = s.length();
+		int b = 10;
+		a = a * 2;
+		a++; // after this a is 13
+		System.out.println(a + b);
+		// System.out.println(a + 1);
+	}
+
+}

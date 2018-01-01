@@ -1,0 +1,16 @@
+import java.util.Scanner;
+
+public class FirstClass {
+	/*
+	 * Read int a String, print out every other letter, starting with the first.
+	 */
+	public static void main(String[] args) {
+		Scanner sc = new Scanner(System.in);
+		String snake = sc.nextLine();
+		System.out.println(snake.charAt(3));
+		/* for (int i = 0; i < snake.length(); i += 2) {
+			snake.charAt(i);
+		} */
+	}
+
+}
